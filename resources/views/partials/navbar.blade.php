@@ -85,7 +85,10 @@
                     </div>
                     <hr>
                     <div class="pull-right" style="margin:2px;" align="center">
-                        <a href="{{ route('user.logout') }}" class="btn btn-default btn-flat" style="color:#CC0000; background-color:#EEE;
+{{--                        <a href="{{ route('user.logout') }}" class="btn btn-default btn-flat" style="color:#CC0000; background-color:#EEE;--}}
+{{--                        border-radius:--}}
+{{--                        5px;">Logout</a>--}}
+                        <a href="" class="btn btn-default btn-flat" style="color:#CC0000; background-color:#EEE;
                         border-radius:
                         5px;">Logout</a>
                     </div>
