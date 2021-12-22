@@ -4,41 +4,56 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function all_data_list()
+    {
+        $data = $this->paginate(20);
+        return $data;
+    }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function store_data($data)
+    {
+        $create_data = $this->create($data);
+        return $create_data;
+    }
+
+    public function find_single_data($column, $column_value)
+    {
+        $data = $this->where($column, $column_value)->first();
+        return $data;
+    }
+
+    public function find_single_trash_data($column, $column_value)
+    {
+        $data = $this->withTrashed()->where($column, $column_value)->first();
+        return $data;
+    }
+
+    public function find_multiple_data($column, $column_value)
+    {
+        $data = $this->where($column, $column_value)->latest()->get();
+        return $data;
+    }
+
+    public function update_data($column, $column_value, $data)
+    {
+        $data = $this->where($column, $column_value)->update($data);
+        return $data;
+    }
+
+    public function trash_data()
+    {
+        $data = $this->onlyTrashed()->paginate(20);
+        return $data;
+    }
 }
