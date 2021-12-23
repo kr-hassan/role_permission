@@ -14,7 +14,7 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
-        {{--<li>
+        <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='fas fa-home'></i>
                 </div>
@@ -22,7 +22,7 @@
             </a>
             <ul>
                 <li>
-                    <a href="{{ route('user') }}">
+                    <a href="#">
                         <div class="sub_parent_icon">
                             <i class="fas fa-arrow-right"></i>
                         </div>
@@ -46,8 +46,8 @@
                     </a>
                 </li>
             </ul>
-        </li>--}}
-{{--        @if(auth()->user()->id == 1)--}}
+        </li>
+        @if(auth()->user()->id == 1)
         <li>
             <a href="#">
                 <div class="parent-icon">
@@ -56,9 +56,9 @@
                 <div class="menu-title">User</div>
             </a>
         </li>
-{{--        @endif--}}
+        @endif
         <li>
-            <a href="#">
+            <a href="{{route('category')}}">
                 <div class="parent-icon">
                     <i class='fas fa-home'></i>
                 </div>
@@ -66,7 +66,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{route('slider')}}">
                 <div class="parent-icon">
                     <i class='fas fa-home'></i>
                 </div>
@@ -74,7 +74,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{route('about_us_list')}}">
                 <div class="parent-icon">
                     <i class='fas fa-home'></i>
                 </div>
@@ -82,7 +82,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{route('our_team_list')}}">
                 <div class="parent-icon">
                     <i class='fas fa-home'></i>
                 </div>
