@@ -30,7 +30,7 @@ use App\Http\Controllers\Frontend\HomeController;
 
 
 
-Route::resource('users', UserController::class);
+//Route::resource('users', UserController::class);
 
 /****************************************Frontend Route Start Here****************************************/
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -64,16 +64,16 @@ Route::group(['middleware' => 'auth'],function(){
     /***************************************End Contact List for Admin***********************************/
 
     /****************************************User Route Start Here****************************************/
-//    Route::get('/user', [UserController::class, 'index'])->name('user');
-//    Route::get('/user-create', [UserController::class, 'user_create'])->name('user_create');
-//    Route::post('/user-create', [UserController::class, 'user_store'])->name('user_store');
-//    Route::get('/user-edit/{id}', [UserController::class, 'user_edit'])->name('user_edit');
-//    Route::post('/user-update/{id}', [UserController::class, 'user_update'])->name('user_update');
-//    Route::get('/user-status/{id}', [UserController::class, 'status_change'])->name('user_status_change');
-//    Route::get('/user-remove/{id}', [UserController::class, 'user_remove'])->name('user_remove');
-//    Route::get('/user-trash', [UserController::class, 'user_trash_list'])->name('user_trash_list');
-//    Route::get('/user-retrieve/{id}', [UserController::class, 'user_retrieve'])->name('user_retrieve');
-//    Route::get('/password-reset/{id}', [UserController::class, 'password_reset'])->name('password_reset');
+    Route::get('/user', [UserController::class, 'index'])->name('user');
+    Route::get('/user-create', [UserController::class, 'user_create'])->name('user_create');
+    Route::post('/user-create', [UserController::class, 'user_store'])->name('user_store');
+    Route::get('/user-edit/{id}', [UserController::class, 'user_edit'])->name('user_edit');
+    Route::post('/user-update/{id}', [UserController::class, 'user_update'])->name('user_update');
+    Route::get('/user-status/{id}', [UserController::class, 'status_change'])->name('user_status_change');
+    Route::get('/user-remove/{id}', [UserController::class, 'user_remove'])->name('user_remove');
+    Route::get('/user-trash', [UserController::class, 'user_trash_list'])->name('user_trash_list');
+    Route::get('/user-retrieve/{id}', [UserController::class, 'user_retrieve'])->name('user_retrieve');
+    Route::get('/password-reset/{id}', [UserController::class, 'password_reset'])->name('password_reset');
     /****************************************User Route End Here****************************************/
 
     /****************************************Category Route Start Here****************************************/

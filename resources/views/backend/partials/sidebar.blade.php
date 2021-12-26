@@ -22,7 +22,7 @@
             </a>
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('user') }}">
                         <div class="sub_parent_icon">
                             <i class="fas fa-arrow-right"></i>
                         </div>
@@ -49,7 +49,7 @@
         </li>
         @if(auth()->user()->id == 1)
         <li>
-            <a href="#">
+            <a href="{{ route('user') }}">
                 <div class="parent-icon">
                     <i class='fas fa-user'></i>
                 </div>
