@@ -52,14 +52,7 @@
 @endsection
 @push('js')
     <script>
-        $(document).ready(function () {
-            let str = $(#name).onkeyup(function (e) {
-                let str = $(#name).val();
-                str = str.replace(/\W+(?!$)/g,'-').
 
-            })
-
-        })
     </script>
 @endpush
 
