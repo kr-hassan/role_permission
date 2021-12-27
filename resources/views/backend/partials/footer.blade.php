@@ -128,6 +128,7 @@
 <script src="{{ mix('js/app.js') }}"></script>
 @stack('js')
 @toastr_render
+<script src="{{ asset('js/bootstrap-tagsinput.js') }}"></script>
 <script>
     @foreach ($errors->all() as $error)
         toastr.error("{{ $error }}")

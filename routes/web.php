@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ use App\Http\Controllers\Frontend\HomeController;
 
 
 
-//Route::resource('users', UserController::class);
+Route::resource('roles', RolesController::class);
 
 /****************************************Frontend Route Start Here****************************************/
 Route::get('/', [HomeController::class, 'index'])->name('home');
