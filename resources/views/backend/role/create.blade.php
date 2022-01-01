@@ -22,20 +22,20 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mb-3 position-relative">
-                                    <label for="name" class="form-label">Role Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder=" Name (ex: Admin )" required>
+                                    <label for="role_name" class="form-label">Role Name</label>
+                                    <input type="text" class="form-control" id="role_name" name="role_name" placeholder=" Name (ex: Admin )" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3 position-relative">
-                                    <label for="slug" class="form-label">Role Slug</label>
-                                    <input type="text" class="form-control" id="slug" name="slug" placeholder="slug" required>
+                                    <label for="role_slug" class="form-label">Role Slug</label>
+                                    <input type="text" class="form-control" id="role_slug" name="role_slug" placeholder="Slug" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3 position-relative">
                                     <label for="permission" class="form-label">Permission</label>
-                                    <input class="input-tags" type="text" data-role="tagsinput" >
+                                    <input class="input-tags" type="text"  data-role="tagsinput" name="roles_permissions" >
                                 </div>
                             </div>
                         </div>
@@ -52,6 +52,17 @@
 @endsection
 @push('js')
     <script>
+        $(document).ready(function () {
+            $('#role_name').keyup(function (e) {
+                let str= $('#role_name').val();
+                console.log(str);
+                str =str.replace(/\W+(?!$)/g, '-').toLowerCase();
+                $('#role_slug').val(str);
+                $('#role_slug').attr('placeholder',str);
+                // console.log(str);
+            });
+
+        })
 
     </script>
 @endpush

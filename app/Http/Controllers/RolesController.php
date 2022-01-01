@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,9 +32,9 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function create( Request $request)
+    public function create(Request $request)
     {
-       return view('backend.role.create');
+        return view('backend.role.create');
 
     }
 
@@ -45,28 +46,45 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
         try {
-            $validator = Validator::make($request->all(),[
-                'name' => 'required',
-                'slug'  => 'required',
+            $validator = Validator::make($request->all(), [
+                'role_name' => 'required',
+                'role_slug' => 'required',
             ], [
-                'name.required' => 'Name is required.',
-                'slug.required' => 'slug is required.',
+                'role_name.required' => 'Role Name is required.',
+                'role_slug.required' => 'Role_slug is required.',
             ]);
 
             if ($validator->fails()) {
                 return back()->withErrors($validator);
             }
-            $data = [
-                'uuid'      =>$this->uuid(),
-                'name'      =>$request->name,
-                'slug'      =>$request->slug,
-            ];
+            $role = new Role();
 
-            $this->role->store_data($data);
+            $data = [
+                'uuid' => $this->uuid(),
+                'role_name' => $request->role_name,
+                'role_slug' => $request->role_slug,
+            ];
+//            $this->role->store_data($data);
+            $roleId = $role->create($data);
+            $listofPermissions = explode(',', $request->roles_permissions);
+            foreach ($listofPermissions as $permission) {
+                $permissions = new Permission();
+                $permissions->name = $permission;
+                $permissions->role_id = $roleId->id;
+                $permissions->slug = strtolower(str_replace(" ", "-", $permission));
+                $permissions->save();
+//                dd($role->permissions()->attach($permissions->id));
+                //$role->permissions()->attach($permissions->id);
+
+                //$role->save();
+            };
+
+
             toastr()->success('Added Successfully.');
             return redirect()->route('roles.index');
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return back()->withErrors($exception->getMessage());
         }
     }
@@ -108,11 +126,11 @@ class RolesController extends Controller
             $column_value = $role->uuid;
             $find_existing_data = $this->role->find_single_data($column, $column_value);
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'slug' => 'required',
+                'role_name' => 'required',
+                'role_slug' => 'required',
             ], [
-                'name.required' => 'Name is required.',
-                'slug.required' => 'Phone is required.',
+                'role_name.required' => 'Name is required.',
+                'role_slug.required' => 'Phone is required.',
             ]);
 
             if ($validator->fails()) {
@@ -122,8 +140,8 @@ class RolesController extends Controller
             $update_column = "id";
             $update_column_value = $find_existing_data->id;
             $update_data = [
-                'name' => $request->name,
-                'slug' => $request->slug,
+                'role_name' => $request->role_name,
+                'role_slug' => $request->role_slug,
             ];
 
             $this->role->update_data($update_column, $update_column_value, $update_data);
